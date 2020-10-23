@@ -22,7 +22,7 @@ opt_standardization_on = True # standardized genome sizes by the genome size of 
 opt_annotation_on = False # annoations on genoPlotR
 opt_figure_width_size = 10 # inch
 
-fAlpha = 0.99
+fAlpha = 0.1
 nRot_annot = "45"
 iPATH_chrsize = wPATH+"input/chrsize/"
 
@@ -348,7 +348,7 @@ def make_dnasegFiles_AdjLenDic_LinkColDic(RefID,iPATH,sID_SortedChrByBuscoOrder_
     nHeader_annot = "x1"+'\t'+ "text" +'\t'+ "color" +'\t'+ "rot" +'\n'
     fpout_annot.write(nHeader_annot)
     if sID == RefID:
-      iCNT = 5 # 1: black, 2: lightgrey, 3: grey, 4: white, 5: blue
+      iCNT = 5 # 1: black, 2: BLUE, 3:lightgrey, 4: grey, 5: white
       for nChrom in nChrom_list:
         iCNT +=1
         nName = nChrom.split("chr")[1]
@@ -357,9 +357,13 @@ def make_dnasegFiles_AdjLenDic_LinkColDic(RefID,iPATH,sID_SortedChrByBuscoOrder_
         nStrand = "1"
         nCol = "1"
         nFill = str(iCNT) # color code start with 5
+        if not int(iCNT/2.0)*2==iCNT: # odd number
+          nFill = "3"
+        else:# even number
+          nFill = "4"
         try:
           if nName == target_chr_name:
-            nFill = "5"
+            nFill = "2"
         except:
           pass
         nLwd = "0.1"
@@ -379,9 +383,9 @@ def make_dnasegFiles_AdjLenDic_LinkColDic(RefID,iPATH,sID_SortedChrByBuscoOrder_
         nLwd = "0.1"
         nCol = "1"
         if not int(iCNT/2.0)*2==iCNT: # odd number
-          nFill = "4"
+          nFill = "5"
         else:# even number
-          nFill = "4"
+          nFill = "5"
         tmpline_dnaseg = nName+'\t'+ nStart +'\t'+ nEnd  +'\t'+ nStrand +'\t'+ nCol +'\t'+ nFill +'\t'+ nLwd+ '\n'
         fpout_dnaseg.write(tmpline_dnaseg)
         tmpline_annot = str(int((int(nEnd)-int(nStart))/2.0)+int(nStart)) +'\t'+ nName +'\t'+ "black" +'\t'+ nRot_annot+ '\n'
@@ -429,7 +433,7 @@ def make_comparisonFiles(RefID, fNAME_BUSCO, sID_nChrom_iAddLen_dic, nRefChrom_n
         sID_nPos_dic[sID].append(str(iPos_Genome))
         if sID == RefID:
           if  nChrom == "chr"+target_chr_name:
-            LinkColCode_list.append("5")
+            LinkColCode_list.append("2")
           else:
             LinkColCode_list.append(nRefChrom_nColCode_dic[nChrom])
   fpin.close()
@@ -450,7 +454,7 @@ def make_comparisonFiles(RefID, fNAME_BUSCO, sID_nChrom_iAddLen_dic, nRefChrom_n
       nCol    = part[4]
       nFill   = part[5]
       nLwd    = part[6]
-      tmpline_back = nName+'\t'+ nStart +'\t'+ nEnd  +'\t'+ nStrand +'\t'+ "4" +'\t'+ "4" +'\t'+ nLwd+ '\n'
+      tmpline_back = nName+'\t'+ nStart +'\t'+ nEnd  +'\t'+ nStrand +'\t'+ "5" +'\t'+ "5" +'\t'+ nLwd+ '\n'
       lines_back += tmpline_back
       tmpline_fill = nName+'\t'+ nStart +'\t'+ nEnd  +'\t'+ nStrand +'\t'+ nCol +'\t'+ nFill +'\t'+ nLwd+ '\n'
       lines_fill += tmpline_fill
@@ -544,15 +548,15 @@ def write_Rscript(RefID, sID_list , iCNT_RefChr):
   fpout.write(tmpline)
 
   try:
-    tmpline = "col_vec_dnaseg = c("+'"'+'black'+'","'+'grey'+'","'+'lightgrey'+'","'+'white'+'","'+'blue'+'",'+nColorPalette+"(iCNT_RefChr, alpha = 0.3))\n"
+    tmpline = "col_vec_dnaseg = c("+'"'+'black'+'","'+'blue'+'","'+'grey'+'","'+'lightgrey'+'","'+'white'+'",'+nColorPalette+"(iCNT_RefChr, alpha = 0.3))\n"
   except:
-    tmpline = "col_vec_dnaseg = c("+'"'+'black'+'","'+'grey'+'","'+'lightgrey'+'","'+'white'+'","'+'blue'+'",'+"makeTransparent(col_vector, alpha = 0.3))\n"
+    tmpline = "col_vec_dnaseg = c("+'"'+'black'+'","'+'blue'+'","'+'grey'+'","'+'lightgrey'+'","'+'white'+'",'+"makeTransparent(col_vector, alpha = 0.3))\n"
   fpout.write(tmpline)
 
   try:
-    tmpline = "col_vec_comp = c("+'"'+'black'+'","'+'grey'+'","'+'lightgrey'+'","'+'white'+'","'+'blue'+'",'+nColorPalette+"(iCNT_RefChr, alpha = "+ str(fAlpha) +"))\n"
+    tmpline = "col_vec_comp = c("+'"'+'black'+'","'+'blue'+'","'+'grey'+'","'+'lightgrey'+'","'+'white'+'",'+nColorPalette+"(iCNT_RefChr, alpha = "+ str(fAlpha) +"))\n"
   except:
-    tmpline = "col_vec_comp = c("+'"'+'black'+'","'+'grey'+'","'+'lightgrey'+'","'+'white'+'","'+'blue'+'",'+"makeTransparent(col_vector, alpha = "+ str(fAlpha) +"))\n"
+    tmpline = "col_vec_comp = c("+'"'+'black'+'","'+'blue'+'","'+'grey'+'","'+'lightgrey'+'","'+'white'+'",'+"makeTransparent(col_vector, alpha = "+ str(fAlpha) +"))\n"
   fpout.write(tmpline)
 
   fpin = open("Rscript/tmplete_4.BUSCO_genoPlotR.R",'r')

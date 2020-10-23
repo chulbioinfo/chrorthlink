@@ -11,11 +11,11 @@ return(newColor)
 library(RColorBrewer)
 qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
 col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
-RefID = "bTaeGut2"
-iCNT_RefChr = 44
+RefID = "hg38"
+iCNT_RefChr = 35
 wPATH = "E:/GoogleDrive/Research/2020/ChrOrthoLink/example/VGP_1st/work/"
 col_vec_dnaseg = c("black","grey","lightgrey","white","blue",makeTransparent(col_vector, alpha = 0.3))
-col_vec_comp = c("black","grey","lightgrey","white","blue",makeTransparent(col_vector, alpha = 0.05))
+col_vec_comp = c("black","grey","lightgrey","white","blue",makeTransparent(col_vector, alpha = 0.99))
 
 library(genoPlotR)
 setwd(wPATH)
@@ -58,20 +58,19 @@ return(comparisonX)
 
 dna_segs = list(
 make_dnaseg_eachID("hg38"),
+make_dnaseg_eachID("mLynCan4"),
 make_dnaseg_eachID("mRhiFer1"),
 make_dnaseg_eachID("mPhyDis1"),
-make_dnaseg_eachID("mLynCan4"),
 make_dnaseg_eachID("mOrnAna1"),
-make_dnaseg_eachID("bTaeGut1"),
-make_dnaseg_eachID("bTaeGut2"),
-make_dnaseg_eachID("bStrHab1"),
-make_dnaseg_eachID("bCalAnn1"),
 make_dnaseg_eachID("rGopEvg1"),
+make_dnaseg_eachID("bCalAnn1"),
+make_dnaseg_eachID("bStrHab1"),
+make_dnaseg_eachID("bTaeGut1"),
 make_dnaseg_eachID("aRhiBiv1"),
 make_dnaseg_eachID("sAmbRad1"),
+make_dnaseg_eachID("fGouWil2"),
 make_dnaseg_eachID("fAstCal1"),
 make_dnaseg_eachID("fArcCen1"),
-make_dnaseg_eachID("fGouWil2"),
 make_dnaseg_eachID("fCotGob3"),
 make_dnaseg_eachID("fMasArm1"),
 make_dnaseg_eachID("fAnaTes1")
@@ -80,20 +79,19 @@ names(dna_segs)=sID_list
 
 annotations = list(
 make_annotation_eachID("hg38"),
+make_annotation_eachID("mLynCan4"),
 make_annotation_eachID("mRhiFer1"),
 make_annotation_eachID("mPhyDis1"),
-make_annotation_eachID("mLynCan4"),
 make_annotation_eachID("mOrnAna1"),
-make_annotation_eachID("bTaeGut1"),
-make_annotation_eachID("bTaeGut2"),
-make_annotation_eachID("bStrHab1"),
-make_annotation_eachID("bCalAnn1"),
 make_annotation_eachID("rGopEvg1"),
+make_annotation_eachID("bCalAnn1"),
+make_annotation_eachID("bStrHab1"),
+make_annotation_eachID("bTaeGut1"),
 make_annotation_eachID("aRhiBiv1"),
 make_annotation_eachID("sAmbRad1"),
+make_annotation_eachID("fGouWil2"),
 make_annotation_eachID("fAstCal1"),
 make_annotation_eachID("fArcCen1"),
-make_annotation_eachID("fGouWil2"),
 make_annotation_eachID("fCotGob3"),
 make_annotation_eachID("fMasArm1"),
 make_annotation_eachID("fAnaTes1")
@@ -114,11 +112,10 @@ make_comp_eachID("12"),
 make_comp_eachID("13"),
 make_comp_eachID("14"),
 make_comp_eachID("15"),
-make_comp_eachID("16"),
-make_comp_eachID("17")
+make_comp_eachID("16")
 )
 
-pdf(paste0(wPATH,"BUSCO_genoPlotR_output/BUSCO_genoPlotR_of_",RefID,"_chr4",".pdf"),10,16.666666666666668)
-plot_gene_map(dna_segs=dna_segs, comparisons=comparisons, annotations = annotations,main=paste0("Chromosomal orthologous links of ",RefID))
+pdf(paste0(wPATH,"BUSCO_genoPlotR_output/BUSCO_genoPlotR_of_",RefID,"_chr6",".pdf"),10,16.666666666666668)
+plot_gene_map(dna_segs=dna_segs, comparisons=comparisons, main=paste0("Chromosomal orthologous links of ",RefID))
 dev.off()
 

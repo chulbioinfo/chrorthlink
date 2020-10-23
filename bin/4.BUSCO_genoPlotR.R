@@ -14,8 +14,8 @@ col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_co
 RefID = "hg38"
 iCNT_RefChr = 35
 wPATH = "E:/GoogleDrive/Research/2020/ChrOrthoLink/example/VGP_1st/work/"
-col_vec_dnaseg = c("black","grey","lightgrey","white","blue",makeTransparent(col_vector, alpha = 0.3))
-col_vec_comp = c("black","grey","lightgrey","white","blue",makeTransparent(col_vector, alpha = 0.99))
+col_vec_dnaseg = c("black","grey","lightgrey","white","blue",makeTransparent(col_vector, alpha = 0.99))
+col_vec_comp = c("black","grey","lightgrey","white","blue",makeTransparent(col_vector, alpha = 0.3))
 
 library(genoPlotR)
 setwd(wPATH)

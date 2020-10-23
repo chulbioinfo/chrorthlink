@@ -22,7 +22,7 @@ opt_standardization_on = True # standardized genome sizes by the genome size of 
 opt_annotation_on = False # annoations on genoPlotR
 opt_figure_width_size = 10 # inch
 
-fAlpha = 0.1
+fAlpha = 0.3
 nRot_annot = "45"
 iPATH_chrsize = wPATH+"input/chrsize/"
 
@@ -548,9 +548,9 @@ def write_Rscript(RefID, sID_list , iCNT_RefChr):
   fpout.write(tmpline)
 
   try:
-    tmpline = "col_vec_dnaseg = c("+'"'+'black'+'","'+'blue'+'","'+'grey'+'","'+'lightgrey'+'","'+'white'+'",'+nColorPalette+"(iCNT_RefChr, alpha = 0.3))\n"
+    tmpline = "col_vec_dnaseg = c("+'"'+'black'+'","'+'blue'+'","'+'grey'+'","'+'lightgrey'+'","'+'white'+'",'+nColorPalette+"(iCNT_RefChr, alpha = 0.99))\n"
   except:
-    tmpline = "col_vec_dnaseg = c("+'"'+'black'+'","'+'blue'+'","'+'grey'+'","'+'lightgrey'+'","'+'white'+'",'+"makeTransparent(col_vector, alpha = 0.3))\n"
+    tmpline = "col_vec_dnaseg = c("+'"'+'black'+'","'+'blue'+'","'+'grey'+'","'+'lightgrey'+'","'+'white'+'",'+"makeTransparent(col_vector, alpha = 0.99))\n"
   fpout.write(tmpline)
 
   try:

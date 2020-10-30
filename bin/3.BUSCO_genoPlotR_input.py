@@ -11,7 +11,8 @@ RefID_list = ["hg38"]#"hg38", "mOrnAna1", "bTaeGut2", "rGopEvg1", "aRhiBiv1", "s
 
 target_chr_name = "6" # or All
 
-wPATH = "E:/GoogleDrive/Research/2020/ChrOrthoLink/example/VGP_1st/work/"
+wPATH = "E:/GoogleDrive/Research/2020/ChrOrthoLink/example/VGP_1st/work/" # Hard coding for now
+# wPATH = "/data/rhiea/chrorthlink/example/VGP_1st/work/"
 
 
 ##########################
@@ -20,7 +21,7 @@ wPATH = "E:/GoogleDrive/Research/2020/ChrOrthoLink/example/VGP_1st/work/"
 opt_sorting_chromosome_by_link = False # "chromosome_number" # or # "link"
 opt_standardization_on = True # standardized genome sizes by the genome size of species with the max size of sum of chromosomes
 opt_annotation_on = False # annoations on genoPlotR
-opt_figure_width_size = 10 # inch
+opt_figure_width_size = 6 # inch
 
 fAlpha = 0.99
 nRot_annot = "45"
@@ -29,7 +30,8 @@ iPATH_chrsize = wPATH+"input/chrsize/"
 #nColorPalette = "rainbow"
 # better to re-order the columns of BUSCO results depend on the order you want to show
 try:
-  fNAME_BuscoCoreMatrix = wPATH+"reordered_Core_Matrix_BUSCO.csv"
+  # fNAME_BuscoCoreMatrix = wPATH+"reordered_Core_Matrix_BUSCO.csv"
+  fNAME_BuscoCoreMatrix = wPATH+"new_Core_Matrix_BUSCO.csv"	# Reordered, now the skate is at the bottom
   fpin = open(fNAME_BuscoCoreMatrix,'r')
   fpin.close()
 except:
@@ -555,7 +557,7 @@ def write_Rscript(RefID, sID_list , iCNT_RefChr):
     tmpline = "col_vec_comp = c("+'"'+'black'+'","'+'grey'+'","'+'lightgrey'+'","'+'white'+'","'+'blue'+'",'+"makeTransparent(col_vector, alpha = "+ str(fAlpha) +"))\n"
   fpout.write(tmpline)
 
-  fpin = open("Rscript/tmplete_4.BUSCO_genoPlotR.R",'r')
+  fpin = open("Rscript/tmplete_BUSCO_genoPlotR.R",'r')
   for line in fpin:
     fpout.write(line)
   fpin.close()
@@ -608,12 +610,12 @@ def write_Rscript(RefID, sID_list , iCNT_RefChr):
 for RefID in RefID_list:
   oPATH = wPATH + "BUSCO_genoPlotR_input/"+RefID+"/"
   try:
-    os.system("mkdir ./BUSCO_genoPlotR_input")
-    os.system("mkdir "+oPATH)
-    os.system("mkdir "+oPATH+"dnaseg")
-    os.system("mkdir "+oPATH+"comaprison")
-    os.system("mkdir "+oPATH+"annotation")
-    os.system("mkdir ./BUSCO_genoPlotR_output")
+    os.system("mkdir " + wPATH + "BUSCO_genoPlotR_input")
+    os.system("mkdir " + oPATH)
+    os.system("mkdir " + oPATH + "dnaseg")
+    os.system("mkdir " + oPATH + "comparison")
+    os.system("mkdir " + oPATH + "annotation")
+    os.system("mkdir " + wPATH + "BUSCO_genoPlotR_output")
     
   except:
     pass

@@ -1,0 +1,7 @@
+speciesID
+LittleSkate
+ThornySkate
+Zebrafish
+Chicken
+Mouse
+Human
